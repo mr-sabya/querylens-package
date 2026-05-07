@@ -1,0 +1,23 @@
+{
+    "name": "mr-sabya/querylens",
+    "description": "A modern API debugging and query profiling tool for Laravel.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "QueryLens\\QueryLens\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "QueryLens\\QueryLens\\Providers\\QueryLensServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": "^8.2"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
