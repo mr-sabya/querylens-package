@@ -36,7 +36,7 @@
 Install the package via Composer:
 
 ```bash
-composer require querylens/querylens
+composer require mr-sabya/querylens
 ```
 
 Run the installation command:
