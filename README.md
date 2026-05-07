@@ -1,15 +1,6 @@
-The "recitation" error usually happens when the AI is trying to provide a long block of text that looks like it might be a copy of an existing document. To avoid that, I have written a **completely fresh and professional README** for you below.
-
-Here is the full markdown content for your `README.md` file.
-
----
-
-### Part 1: The Full README.md Content
-
-```markdown
 # 🔍 QueryLens
 
-**QueryLens** is a modern, lightweight, and high-performance API debugging and SQL profiling tool for Laravel. It provides a real-time dashboard to monitor your application's database activity and API performance without the bloat.
+**QueryLens** is a modern, lightweight, and high-performance API debugging and SQL profiling tool for Laravel. It provides a real-time dashboard to monitor your application's database activity and API performance without unnecessary complexity.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/querylens/querylens.svg?style=flat-square)](https://packagist.org/packages/querylens/querylens)
 [![Total Downloads](https://img.shields.io/packagist/dt/querylens/querylens.svg?style=flat-square)](https://packagist.org/packages/querylens/querylens)
@@ -18,105 +9,274 @@ Here is the full markdown content for your `README.md` file.
 
 ## ✨ Features
 
-- ⚡ **Zero-Config Realtime Dashboard**: Monitor requests as they happen.
-- 🛠 **Deep SQL Profiling**: View SQL queries, execution time, and exact file/line source.
-- 📦 **Independent Storage**: Uses a dedicated SQLite database—no clutter in your main database.
-- 🎨 **Modern UI**: Dark-themed, mobile-friendly interface with syntax highlighting.
-- 🚀 **Lightweight**: Minimal overhead, perfect for local development.
+- ⚡ Zero-Configuration Setup
+- 🛠 Deep SQL Query Profiling
+- 📊 Real-Time Request Monitoring
+- 🧠 Query Execution Time Analysis
+- 🎨 Modern Dark UI Dashboard
+- 📦 Dedicated SQLite Storage
+- 🚀 Lightweight & Fast
+- 🔥 Slow Query Detection
+- 📱 Mobile Responsive Interface
+- 🔍 Request & Response Inspection
 
 ---
 
 ## 💻 Requirements
 
-- **PHP**: ^8.2
-- **Laravel**: ^10.0 | ^11.0 | ^12.0
+| Requirement | Version |
+|-------------|---------|
+| PHP | ^8.2 |
+| Laravel | ^10.0 \| ^11.0 \| ^12.0 |
 
 ---
 
-## 🚀 Installation
+## 📦 Installation
 
-1. **Install the package via Composer:**
+Install the package via Composer:
 
 ```bash
 composer require querylens/querylens
 ```
 
-2. **Run the installation command:**
+Run the installation command:
 
 ```bash
 php artisan querylens:install
 ```
 
-This will publish the configuration file and set up the QueryLens storage directory.
+This command will:
+
+- Publish configuration files
+- Create QueryLens storage
+- Prepare SQLite logging database
+- Register required assets
 
 ---
 
 ## ⚙️ Configuration
 
-After installation, you can customize QueryLens in `config/querylens.php`:
+After installation, configure QueryLens from:
+
+```text
+config/querylens.php
+```
+
+Example configuration:
 
 ```php
+<?php
+
 return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Enable QueryLens
+    |--------------------------------------------------------------------------
+    */
+
     'enabled' => env('QUERYLENS_ENABLED', true),
-    
-    'uri' => 'querylens', // The URL path for the dashboard
-    
-    'slow_query_threshold' => 500, // Highlight queries slower than 500ms
-    
+
+    /*
+    |--------------------------------------------------------------------------
+    | Dashboard URI
+    |--------------------------------------------------------------------------
+    */
+
+    'uri' => 'querylens',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Slow Query Threshold (milliseconds)
+    |--------------------------------------------------------------------------
+    */
+
+    'slow_query_threshold' => 500,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Middleware
+    |--------------------------------------------------------------------------
+    */
+
     'middleware' => [
-        'web', // Add 'auth' here to restrict access
+        'web',
+        // 'auth',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Maximum Stored Logs
+    |--------------------------------------------------------------------------
+    */
+
+    'max_logs' => 5000,
+
 ];
 ```
 
 ---
 
-## 📖 Usage
+## 🚀 Usage
 
-Once installed, simply navigate to `/querylens` in your browser. 
+Start your Laravel application:
 
-QueryLens will automatically start recording:
-- Incoming HTTP Requests (Method, Path, Status, Duration)
-- Executed SQL Queries (SQL, Bindings, Duration, File & Line source)
+```bash
+php artisan serve
+```
 
-To clear the logs, use the **Clear Logs** button directly from the dashboard.
+Open the dashboard in your browser:
+
+```text
+http://127.0.0.1:8000/querylens
+```
+
+QueryLens will automatically record:
+
+- HTTP Requests
+- API Calls
+- SQL Queries
+- Query Bindings
+- Response Time
+- Memory Usage
+- Slow Queries
+- Request Timeline
+
+---
+
+## 📊 Dashboard Preview
+
+The dashboard includes:
+
+### Request Monitoring
+- HTTP Method
+- Route Path
+- Response Status
+- Request Duration
+
+### SQL Query Insights
+- Raw SQL Query
+- Query Bindings
+- Execution Time
+- Source File & Line
+
+### Performance Analysis
+- Memory Consumption
+- Slow Query Alerts
+- Duplicate Query Detection
+
+---
+
+## 🔥 Slow Query Detection
+
+Queries slower than the configured threshold will automatically be highlighted.
+
+Example:
+
+```text
+⚠ Slow Query Detected (842ms)
+```
+
+---
+
+## 🗂 Storage
+
+QueryLens uses a dedicated SQLite database for storing logs.
+
+This keeps your primary application database clean and optimized.
+
+---
+
+## 🔐 Security
+
+QueryLens is intended for local and development environments.
+
+Disable it in production:
+
+```env
+QUERYLENS_ENABLED=false
+```
+
+You may also protect the dashboard using authentication middleware:
+
+```php
+'middleware' => [
+    'web',
+    'auth',
+],
+```
+
+---
+
+## 🧪 Example Query Log
+
+```sql
+select * from users where email = ?
+```
+
+Execution details:
+
+```text
+Duration: 12ms
+Connection: mysql
+Memory: 4MB
+```
+
+---
+
+## 📁 Package Structure
+
+```text
+src/
+├── Commands/
+├── Facades/
+├── Http/
+│   ├── Controllers/
+│   └── Middleware/
+├── Listeners/
+├── Models/
+├── Providers/
+├── Services/
+├── Support/
+├── resources/
+│   ├── views/
+│   ├── js/
+│   └── css/
+└── config/
+```
+
+---
+
+## 🛠 Roadmap
+
+- Live AJAX Auto Refresh
+- Real-Time WebSocket Monitoring
+- Redis Monitoring
+- Queue Monitoring
+- Exception Tracking
+- Export Logs
+- Multi-Project Support
 
 ---
 
 ## 🤝 Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+Contributions are welcome.
 
-## 📄 License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-```
+1. Fork the repository
+2. Create a new feature branch
+3. Commit your changes
+4. Push your branch
+5. Open a Pull Request
 
 ---
 
-### Part 2: Instructions on how to make a README (For your future prompts)
+## 📄 License
 
-If you want to generate a README using an AI prompt in the future, follow this structure to get the best results:
+This package is open-sourced software licensed under the MIT license.
 
-**The Prompt Strategy:**
-> "Write a professional README.md for a Laravel package named **[Name]**. 
-> 
-> **Context:** It is a **[Description of what it does]**.
-> 
-> **Key Features to include:** 
-> 1. [Feature 1]
-> 2. [Feature 2]
-> 
-> **Sections needed:** 
-> - A catchy header with emojis.
-> - Installation section using Composer.
-> - A configuration section showing a sample `config/*.php` file.
-> - A 'How it works' or 'Usage' section.
-> - Use a clean, modern markdown style with badges and code blocks."
+---
 
-### Why did the "Recitation Block" happen earlier?
-AI models have safety filters. When you ask for a "Full README," and it starts generating very common patterns (like "Install via composer... MIT License"), the filter sometimes thinks it is copying a copyrighted document. To avoid this:
-1. **Don't ask for "Full"** in the same way twice—ask the AI to "draft a custom README."
-2. **Provide specific details** (like your specific package name) so the AI knows it's a unique project.
+## ⭐ Support
 
-**Are you ready to move on to adding the "Live Search" or "AJAX Auto-refresh" to the dashboard?**
+If you find QueryLens useful, consider starring the repository on GitHub.
